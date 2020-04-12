@@ -2,9 +2,12 @@
 # This file spins up a basic web server used to host the configuration site
 # Run with sudo!
 
-WEBDIR_PATH='/var/www/'
-ROOT_DIR="$(cd "$(dirname "$0")/../"; pwd)"
+WEBDIR_PATH='/var/www/html/'
+ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
 WEBFILES_PATH="$ROOT_DIR/www/"
+
+# install apache 2 to host the website
+apt install apache2
 
 # if the WEBDIR_PATH does not exist create it
 if [ -d $WEBDIR_PATH ]

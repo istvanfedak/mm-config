@@ -5,11 +5,13 @@
 # Make sure to run the following commands first
 # - sudo apt update
 # - sudo apt upgrade
+# Note this install will require a reboot
 
 ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
 CONFIGDIR_PATH="$ROOT_DIR/config"
 DHCPCD_CONF='dhcpcd.conf'
 DNSMASQ_CONF='dnsmasq.conf'
+HOSTNAME='hostname'
 HOSTS='hosts'
 HOSTAPD_CONF='hostapd.conf'
 INTERFACES='interfaces'
@@ -55,14 +57,23 @@ fi
 cp $CONFIGDIR_PATH/$DNSMASQ_CONF '/etc/'
 echo "$CONFIGDIR_PATH/$DNSMASQ_CONF copied into /etc/"
 
+# rename the hostname of the computer to the one in .../config/hostname
+if [ -f "/etc/$HOSTNAME.save" ]; then
+  echo "/etc/$HOSTNAME.save already exists"
+else
+  mv /etc/$HOSTNAME /etc/$HOSTNAME.save
+  echo "/etc/$HOSTNAME.save file created"
+fi
+
+# copy our hostname file into the directory
+cp $CONFIGDIR_PATH/$HOSTNAME '/etc/'
+echo "$CONFIGDIR_PATH/$HOSTNAME copied into /etc/"
+
 # configuring the dnsmasq local hosts
 # first save the hosts file and append it to the template
 if [ -f "/etc/$HOSTS.save" ]; then
   echo "/etc/$HOSTS.save already exists"
 else
-  # append the hosts file to our hosts template
-  cat /etc/$HOSTS >> $CONFIGDIR_PATH/$HOSTS
-  echo "/etc/$HOSTS appended to the end of $CONFIGDIR_PATH/$HOSTS"
   mv /etc/$HOSTS /etc/$HOSTS.save
   echo "/etc/$HOSTS.save file created"
 fi

@@ -4,6 +4,10 @@
 
 WEBDIR_PATH='/var/www/'
 
+# uninstall apache2 web server
+apt remove apache2
+echo "Removed apache2 web sever"
+
 # if the WEBDIR_PATH exist delete it
 if [ -d $WEBDIR_PATH ]
 then

@@ -2,7 +2,7 @@
 # This file stops a basic web server
 # Run with sudo if listenign to port 80
 
-# kill the busybox webserver process
-pkill busybox
-echo 'stopped busybox process'
+# stop the apache2 webserver process
 
+echo 'stopped apache2 process'
+service apache2 stop
