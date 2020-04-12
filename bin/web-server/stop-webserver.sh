@@ -4,5 +4,5 @@
 
 # kill the busybox webserver process
 pkill busybox
-
+echo 'stopped busybox process'
 
