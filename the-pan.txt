@@ -1,0 +1,67 @@
+This is the plan:
+
+#1 goal: keep it simple and modular
+
+  maybe: separate 2 services into separate repos
+
+Prereqs: admin would have to install all 2 services and correctly configure
+         all MagicMirror modules correctly
+
+   note: this is not meant to replace the admin but it does accomplish 2 tasks
+         1. allow user to connect raspberry pi to wifi if disconnected
+            - example: if they move the mirror or change wifi password
+         2. allow amdin to configure the existing mirror modules without having
+            to ssh into the machine or give instructions to user on how to 
+            solve it
+            - Feature: allow the option for raw upload, where the admin can send
+                       a config json file for the user to upload it
+                       - the file could be emailed to the user and it would be
+                         plug and play if tested by the admin properly
+
+   note: updates should be done by the admin over ssh. This wont replace adding
+         features to the mirror or system updates.
+         - If changes, other than basic config changes, are to be made, 
+           I recommend you make them on a dev board, test them on the dev board
+           and then give the new micro sd card to the user
+
+Have two separate services
+1 a. Have script that check for wifi and internet connection
+   every 1 minute
+   - if not connected
+     - spin down mm-config-service if its spun up
+     - spin up wifi-config-service if its spun down
+   - if connected
+     - spin down wifi-config-service if its spun up
+     - spin up mm-config-service if its spun down
+   - maybe feature: allow multiple services to be run if connected to wifi
+                    not just mm-config
+
+1 b. wifi configuration setup
+   - spins up access point to configure wifi
+   - only available when not connected to any wifi
+   - Steps:
+     0. maybe: disable wifi checking script
+     1. Wait for user to configure wifi (wait for POST request)
+     2. Ask user for password
+        a. If defaul passowrd ask user to change password
+     3. Prompt user that the MagicMirror will restart and that mirror's wifi
+        wont be there if wifi connection was successful and internet connection
+        was established
+     4. Allow user to select nearby wifi's and enter the passowrd
+        a. would be cool if we could very wifi password with router directly
+           so we don't have to restart the service
+     2. Turn off access point
+     4. Configure wifi with post request body contents
+     5. Restart machine for access point to turn off 
+   - Test: test if this works, not sure tbh
+
+2. mm-config-api service
+   - spins up when connected to wifi and iternet
+   - allows user to configure the MagicMirror from a web browser
+   - Steps:
+     1. ask for password and authenticate
+     2. spin up actual mm-config-api
+   - Features that need to be implemented
+     - ability to change default password
+     - configure the default magic mirror config file
+     - raw config upload

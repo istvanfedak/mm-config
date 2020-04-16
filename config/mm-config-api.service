@@ -1,0 +1,16 @@
+# this is the service configuration file for the mm-config-api
+[Unit]
+Description=API for configuring the MagicMirror module of raspberry pi remotely
+
+[Service]
+ExecStart=/var/www/mm-config-api/api-server.js
+Restart=always
+User=nobody
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=nogroup
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/var/www/mm-config-api
+
+[Install]
+WantedBy=multi-user.target
