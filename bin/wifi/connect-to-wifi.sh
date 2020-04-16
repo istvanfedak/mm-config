@@ -4,7 +4,8 @@
 # note this script will clear this command from the ~/.bash_history for
 # security
 
-echo $#
+ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
+SCRIPTS="$ROOT_DIR/bin"
 
 if [ $# != 1 ]; then
   echo "usage: sudo bash $0 <wifi-name> <password>"
@@ -38,5 +39,8 @@ wpa_cli -i wlan0 reconfigure
 # clear the session's bash history
 history -c
 
-# TODO validate if connection was successful
-#      return visual feedback
+# sleep for 5 seconds to wait for wifi connection
+sleep 8
+
+# validate if connection was successful
+bash $SCRIPTS/wifi/verify-wifi-connection.sh
