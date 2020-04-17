@@ -2,8 +2,10 @@
 # This file installs and runs the web server
 # run as sudo
 
-ROOT_DIR="$(cd "$(dirname "$0")/../"; pwd)"
-SCRIPTS="$ROOT_DIR/bin/"
+SCRIPTS="/usr/local/bin/"
+
+echo "installer started"
+exit 0
 
 # 1. install node js
 bash $SCRIPTS/nodejs/install-nodejs.sh 
