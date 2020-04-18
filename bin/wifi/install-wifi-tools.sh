@@ -11,4 +11,9 @@ ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
 # path to the scripts
 SCRIPTS="$ROOT_DIR/bin/"
 
+# files
+CONNECT='connect-to-wifi'
+DISCONNECT='disconnect-from-wifi'
+
+
 
