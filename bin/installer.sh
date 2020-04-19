@@ -2,9 +2,11 @@
 # This file installs and runs the web server
 # run as sudo
 
-SCRIPTS="/usr/local/bin/"
+SCRIPTS="/usr/local/mm-config/bin/"
 
 echo "installer started"
+echo "note: you will be prompted for user input"
+sleep 1
 exit 0
 
 # 1. install node js
@@ -15,13 +17,13 @@ bash $SCRIPTS/magic-mirror/install-magic-mirror.sh
 
 # 3. install access point service
 bash $SCRIPTS/access-point/install-access-point-service.sh
-bash $SCRIPTS/access-point/run-access-point-service.sh
+# bash $SCRIPTS/access-point/run-access-point-service.sh
 
 # 4. install web server and www files and run web server
 bash $SCRIPTS/web-server/install-webserver-files.sh
-bash $SCRIPTS/web-server/run-webserver.sh
+# bash $SCRIPTS/web-server/run-webserver.sh
 
-# 5. TODO install and run the api
+# 5. TODO install and run the mm-config-api
 
 # 6. TODO install script that spins up everythign if the raspbery pi
 #    is not connected to the internet. Once the pi is connected to the

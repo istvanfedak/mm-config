@@ -10,12 +10,12 @@ systemctl stop hostapd
 echo 'stoped hostapd'
 
 # restore the dhcpcd config file
-cp $DHCPCD_CONF.save $DHCPCD_CONF
+mv $DHCPCD_CONF.save $DHCPCD_CONF
 echo "$DHCPCD_CONF file restored"
 
-cp $INTERFACES.save $INTERFACES
+# restore the network interfaces config file
+mv $INTERFACES.save $INTERFACES
 echo "$INTERFACES file restored"
 
 echo "Please reboot for changes to take effect"
-
 

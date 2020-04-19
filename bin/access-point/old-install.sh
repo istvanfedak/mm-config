@@ -1,12 +1,11 @@
 # !/bin/bash
-# This file installs the necessary software needed to make the raspberry pi 
-# into an access point
+# This file installs the necessary software to make the raspberry pi into an
+# access point
 # Run with sudo!
 # Make sure to run the following commands first
 # - sudo apt update
 # - sudo apt upgrade
 # Note this install will require a reboot
-
 ROOT_DIR='/usr/local/mm-config'
 CONFIGDIR_PATH="$ROOT_DIR/config"
 RUN_AP_SERVICE="$ROOT_DIR/bin/access-point/run-access-point-service.sh"
@@ -27,6 +26,23 @@ systemctl stop dnsmasq
 echo 'stoped dnsmasq'
 systemctl stop hostapd
 echo 'stoped hostapd'
+
+# modify the dhcpcd.conf file
+# first save the template if the save file doesn't exist
+if [ -f "/etc/$DHCPCD_CONF.save" ]; then
+  echo "/etc/$DHCPCD_CONF.save already exists"
+else
+  mv /etc/$DHCPCD_CONF /etc/$DHCPCD_CONF.save
+  echo "/etc/$DHCPCD_CONF.save file created"
+fi
+
+# copy our dhcpcd config file into the directory
+cp $CONFIGDIR_PATH/$DHCPCD_CONF '/etc/'
+echo "$CONFIGDIR_PATH/$DHCPCD_CONF copied into /etc/" 
+
+# restart the dhcpcd daemon
+sudo service dhcpcd restart
+echo "Restarted dhcpcd service"
 
 # configuring the DHCP server (dnsmasq)
 # first save the template if the save file doesn't exist
@@ -66,9 +82,38 @@ fi
 cp $CONFIGDIR_PATH/$HOSTS '/etc/'
 echo "$CONFIGDIR_PATH/$HOSTS copied into /etc/"
 
+# restart the dnsmasq service
+systemctl start dnsmasq
+
+# configuring the access point host software (hostapd)
+# first save the template if the save file doesn't exist
+# if [ -f "/etc/hostapd/$HOSTAPD_CONF.save" ]; then
+#   echo "/etc/hostapd/$HOSTAPD_CONF.save already exists"
+# else
+#   mv /etc/hostapd/$HOSTAPD_CONF /etc/hostapd/$HOSTAPD_CONF.save
+#   echo "/etc/$HOSTAPD_CONF.save file created"
+# fi
+
 # copy our hostapd config file into the directory
 cp $CONFIGDIR_PATH/$HOSTAPD_CONF '/etc/hostapd/'
 echo "$CONFIGDIR_PATH/$HOSTAPD_CONF copied into /etc/hostapd/"
 
-# run the access point service after install
+# now we need to tell the system where to find the configuration file
+# make a copy of the default network interfaces file
+if [ -f "/etc/network/$INTERFACES.save" ]; then
+  echo "/etc/network/$INTERFACES.save already exists"
+else
+  mv /etc/network/$INTERFACES /etc/network/$INTERFACES.save
+  echo "/etc/network/$INTERFACES.save file created"
+fi
+
+# copy our network interfaces file into the directory
+cp $CONFIGDIR_PATH/$INTERFACES '/etc/network/'
+echo "$CONFIGDIR_PATH/$INTERFACES copied into /etc/network/"
+
+# start hostapd up
+systemctl unmask hostapd
+# systemctl enable hostapd
+# systemctl start hostapd
+
 bash $RUN_AP_SERVICE
