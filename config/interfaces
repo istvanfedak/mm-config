@@ -8,6 +8,5 @@ auto wlan0
 iface wlan0 inet manual
 	hostapd /etc/hostapd/hostapd.conf
 
-
 # Include files from /etc/network/interfaces.d:
 source-directory /etc/network/interfaces.d

@@ -8,7 +8,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
 SCRIPTS="$ROOT_DIR/bin"
 
 if [ $# != 1 ]; then
-  echo "usage: sudo bash $0 <wifi-name> <password>"
+  echo "usage: sudo bash $0 <wifi-name>"
   exit 0
 fi
 
@@ -40,7 +40,8 @@ wpa_cli -i wlan0 reconfigure
 history -c
 
 # sleep for 5 seconds to wait for wifi connection
-sleep 8
+echo 'verifying wifi connection please wait'
+sleep 10
 
 # validate if connection was successful
-bash $SCRIPTS/wifi/verify-wifi-connection.sh
+bash $SCRIPTS/wifi/wifi-status.sh

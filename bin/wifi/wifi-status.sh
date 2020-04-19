@@ -2,7 +2,7 @@
 # this script verifies if the computer is connected to the wifi
 # and the internet
 
-WIFI_INFO="$(ip address show wlan0 | grep -i inet)"
+WIFI_INFO="$(ip address show wlan0 | grep -i 'inet')"
 INTERNET_CONNECTION="$(ping -c 1 -q google.com >&/dev/null; echo $?)"
 
 # check if connected to wifi by verifying an ip was assigned

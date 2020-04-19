@@ -1,0 +1,20 @@
+{
+    "modules" : [
+	{
+	    "module": "handler",
+	    "port": "50000"
+	},
+        {
+            "module": "config",
+	    "port": "50001"
+        },
+	{
+	    "module": "wifi",
+	    "port": "50002"
+	},
+	{
+	    "module": "settings",
+	    "port": "50003"
+	}
+    ]
+}
