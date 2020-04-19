@@ -3,7 +3,7 @@
 # Run with sudo!
 
 WEBDIR_PATH='/var/www/html/'
-ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
+ROOT_DIR='/usr/local/mm-config'
 WEBFILES_PATH="$ROOT_DIR/www/"
 
 # install apache 2 to host the website
@@ -19,6 +19,5 @@ else
 fi
 
 # copy the files over
-echo "$WEBFILES_PATH* files copied to $WEBDIR_PATH"
 cp -R $WEBFILES_PATH* $WEBDIR_PATH
-
+echo "$WEBFILES_PATH* files copied to $WEBDIR_PATH"
