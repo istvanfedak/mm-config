@@ -41,7 +41,7 @@ cp $CONFIGDIR_PATH/$DHCPCD_CONF '/etc/'
 echo "$CONFIGDIR_PATH/$DHCPCD_CONF copied into /etc/" 
 
 # restart the dhcpcd daemon
-sudo service dhcpcd restart
+service dhcpcd restart
 echo "Restarted dhcpcd service"
 
 # configuring the DHCP server (dnsmasq)
@@ -85,35 +85,25 @@ echo "$CONFIGDIR_PATH/$HOSTS copied into /etc/"
 # restart the dnsmasq service
 systemctl start dnsmasq
 
-# configuring the access point host software (hostapd)
-# first save the template if the save file doesn't exist
-# if [ -f "/etc/hostapd/$HOSTAPD_CONF.save" ]; then
-#   echo "/etc/hostapd/$HOSTAPD_CONF.save already exists"
-# else
-#   mv /etc/hostapd/$HOSTAPD_CONF /etc/hostapd/$HOSTAPD_CONF.save
-#   echo "/etc/$HOSTAPD_CONF.save file created"
-# fi
-
 # copy our hostapd config file into the directory
 cp $CONFIGDIR_PATH/$HOSTAPD_CONF '/etc/hostapd/'
 echo "$CONFIGDIR_PATH/$HOSTAPD_CONF copied into /etc/hostapd/"
 
 # now we need to tell the system where to find the configuration file
 # make a copy of the default network interfaces file
-if [ -f "/etc/network/$INTERFACES.save" ]; then
-  echo "/etc/network/$INTERFACES.save already exists"
-else
-  mv /etc/network/$INTERFACES /etc/network/$INTERFACES.save
-  echo "/etc/network/$INTERFACES.save file created"
-fi
+# if [ -f "/etc/network/$INTERFACES.save" ]; then
+#   echo "/etc/network/$INTERFACES.save already exists"
+# else
+#   mv /etc/network/$INTERFACES /etc/network/$INTERFACES.save
+#   echo "/etc/network/$INTERFACES.save file created"
+# fi
 
 # copy our network interfaces file into the directory
-cp $CONFIGDIR_PATH/$INTERFACES '/etc/network/'
-echo "$CONFIGDIR_PATH/$INTERFACES copied into /etc/network/"
+# cp $CONFIGDIR_PATH/$INTERFACES '/etc/network/'
+# echo "$CONFIGDIR_PATH/$INTERFACES copied into /etc/network/"
 
 # start hostapd up
-systemctl unmask hostapd
-# systemctl enable hostapd
-# systemctl start hostapd
+# systemctl unmask hostapd
+systemctl start hostapd
 
-bash $RUN_AP_SERVICE
+# bash $RUN_AP_SERVICE

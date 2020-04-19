@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file installs the necessary software to make the raspberry pi into an
 # access point
 # Run with sudo!
@@ -48,6 +48,7 @@ cp $CONFIGDIR_PATH/$INTERFACES '/etc/network/'
 echo "$CONFIGDIR_PATH/$INTERFACES copied into /etc/network/"
 
 # start hostapd up
+systemctl unmask hostapd
 systemctl start hostapd
 echo 'started hostapd service'
 
