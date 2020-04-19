@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file runs a basic web server
 # Run with sudo if port is 80
 

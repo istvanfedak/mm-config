@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # run with sudo
 # this file will disconnect you from wifi and clear all wifi settings
 

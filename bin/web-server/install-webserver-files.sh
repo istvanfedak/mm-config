@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file spins up a basic web server used to host the configuration site
 # Run with sudo!
 

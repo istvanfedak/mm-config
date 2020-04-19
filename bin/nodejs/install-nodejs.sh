@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # run with sudo
 # this script installs nodejs and npm
 

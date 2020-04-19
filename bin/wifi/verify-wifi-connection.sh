@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # this script verifies if the computer is connected to the wifi
 # and the internet
 

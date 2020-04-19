@@ -1,0 +1,8 @@
+- work on the mm-config-handler
+  - make sure that its starting the api when connected to the internet
+- after the mm-config-handler is properly tested, start working on the api
+  - 2 states to the api depending if connected to access point
+    - disconnected
+      - only allow wifi connection
+    - connected
+      - only allow 

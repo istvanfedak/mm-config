@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # run with sudo
 # this file will connect you to the wifi given the wifi name and password
 # note this script will clear this command from the ~/.bash_history for

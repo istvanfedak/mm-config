@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file installs the necessary software needed to make the raspberry pi 
 # into an access point
 # Run with sudo!

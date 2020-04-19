@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file stops the access point service
 # Run with sudo
 DHCPCD_CONF='/etc/dhcpcd.conf'

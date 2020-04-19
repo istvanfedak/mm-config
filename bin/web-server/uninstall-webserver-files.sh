@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file removed all the web config files from the system
 # Run with sudo!
 

@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # This file stops a basic web server
 # Run with sudo if listenign to port 80
 

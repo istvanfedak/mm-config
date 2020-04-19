@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # this script attempts to install the magic mirror on the raspberry pi
 # run with sudo
 
