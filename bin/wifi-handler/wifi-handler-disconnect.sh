@@ -11,9 +11,9 @@ APH_RUN_SH="$SCRIPTS/access-point-handler/run-access-point-handler.sh"
 APH_STOP_SH="$SCRIPTS/access-point-handler/stop-access-point-handler.sh"
 
 # define all the access point config scripts needed
-AP_STATUS_SH="$SCRIPTS/access-point/access-point-status.sh"
-AP_RUN_SH="$SCRIPTS/access-point/run-access-point.sh"
-AP_STOP_SH="$SCRIPTS/access-point/stop-access-point.sh"
+AP_STATUS_SH="$SCRIPTS/access-point/access-point-service-status.sh"
+AP_RUN_SH="$SCRIPTS/access-point/run-access-point-service.sh"
+AP_STOP_SH="$SCRIPTS/access-point/stop-access-point-service.sh"
 
 # define all the wifi scripts needed
 WIFI_DISCONNECT_SH="$SCRIPTS/wifi/disconnect-from-wifi.sh"
@@ -21,7 +21,7 @@ WIFI_DISCONNECT_SH="$SCRIPTS/wifi/disconnect-from-wifi.sh"
 # if the access point handler is active stop it
 if [ $(bash $APH_STATUS_SH) == "active" ]; then
   bash $APH_STOP_SH
-  echo 'stopped access-point-handler.service'
+  # echo 'stopped access-point-handler.service'
 fi
 
 # if the access point is active stop it
@@ -33,6 +33,10 @@ fi
 # attempt to disconnect from wifi
 echo 'attempting to disconnect from wifi'
 bash $WIFI_DISCONNECT_SH $WIFI_NAME
+
+# sleep for 5 seconds to give enough time to disconnect from wifi
+echo 'attempting to start up access point please wait'
+sleep 3
 
 # if not connected to wifi start up access point
 bash $AP_RUN_SH

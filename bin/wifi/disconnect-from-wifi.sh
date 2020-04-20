@@ -16,4 +16,7 @@ fi
 # reconfigure wifi to disconnect from it
 wpa_cli -i wlan0 reconfigure
 
+# flush the wlan0
+ip link set dev wlan0 down
+ip link set dev wlan0 up
 

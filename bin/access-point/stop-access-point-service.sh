@@ -26,3 +26,7 @@ else
   echo "warning: $INTERFACES.save file could not be found"
   echo "  manually restore $INTERFACES"
 fi
+
+# resetting the wifi interface
+ip link set dev wlan0 down
+ip link set dev wlan0 up

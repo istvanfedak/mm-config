@@ -16,6 +16,7 @@ WIFI_NAME=$1
 
 # read in the password
 read -sp 'Password: ' PASSWORD
+echo ''
 
 # define all the access point handler scripts needed
 APH_STATUS_SH="$SCRIPTS/access-point-handler/access-point-handler-status.sh"
@@ -23,9 +24,9 @@ APH_RUN_SH="$SCRIPTS/access-point-handler/run-access-point-handler.sh"
 APH_STOP_SH="$SCRIPTS/access-point-handler/stop-access-point-handler.sh"
 
 # define all the access point config scripts needed
-AP_STATUS_SH="$SCRIPTS/access-point/access-point-status.sh"
-AP_RUN_SH="$SCRIPTS/access-point/run-access-point.sh"
-AP_STOP_SH="$SCRIPTS/access-point/stop-access-point.sh"
+AP_STATUS_SH="$SCRIPTS/access-point/access-point-service-status.sh"
+AP_RUN_SH="$SCRIPTS/access-point/run-access-point-service.sh"
+AP_STOP_SH="$SCRIPTS/access-point/stop-access-point-service.sh"
 
 # define all the wifi scripts needed
 WIFI_STATUS_SH="$SCRIPTS/wifi/wifi-status.sh"
@@ -56,5 +57,5 @@ fi
 
 # start up the access point handler service
 bash $APH_RUN_SH
-echo 'started the access-point-handler service'
+# echo 'started the access-point-handler service'
 
