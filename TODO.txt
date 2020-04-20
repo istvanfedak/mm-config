@@ -1,8 +1,22 @@
-- work on the mm-config-handler
-  - make sure that its starting the api when connected to the internet
-- after the mm-config-handler is properly tested, start working on the api
-  - 2 states to the api depending if connected to access point
-    - disconnected
-      - only allow wifi connection
-    - connected
-      - only allow 
+TODO list
+- test out the access-point-handler service properly under all edge cases
+- test out the wifi-handler connect and disconnect service under all edge cases
+- start working the basic modules
+  - handler module
+    - should start up all other modules specified in the config
+      - allow to start and stop a module
+        - get list of modules
+        - get module status (if its running)
+        - put module status (start / stop) module
+  - config module
+    - should be a graphql api for obtaining the following
+      - get module port number
+  - wifi module
+    - should allow user to connect to wifi
+      - get wifi list
+      - get wifi connection status
+      - put (connect to) wifi
+  - settings module
+    - should allow user to customize the MagicMirror config file
+      - get magic mirror config file
+      - put magic mirror config file
