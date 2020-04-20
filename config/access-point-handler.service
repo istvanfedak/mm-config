@@ -1,0 +1,16 @@
+# this is the service configuration file for the access point handler
+[Unit]
+Description=Access point handler, when not connected to wifi it runs the AP
+
+[Service]
+ExecStart=/bin/bash /usr/local/mm-config/bin/access-point-handler/access-point-handler.sh
+Restart=always
+User=nobody
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=nogroup
+Environment=PATH=/bin
+# Environment=NODE_ENV=production
+# WorkingDirectory=/var/www/mm-config-api
+
+[Install]
+WantedBy=multi-user.target
