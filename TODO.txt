@@ -1,6 +1,6 @@
 TODO list
-- test out the access-point-handler service properly under all edge cases
-- test out the wifi-handler connect and disconnect service under all edge cases
+- fix access-point-handler service error
+  - has something to do with the system running it
 - start working the basic modules
   - handler module
     - should start up all other modules specified in the config

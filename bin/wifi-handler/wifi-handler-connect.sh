@@ -35,14 +35,12 @@ WIFI_CONNECT_SH="$SCRIPTS/wifi/connect-to-wifi.sh"
 # if the access point handler is active stop it
 if [ $(bash $APH_STATUS_SH) == "active" ]; then
   bash $APH_STOP_SH
-  echo 'stopped access-point-handler.service'
+  # echo 'stopped access-point-handler.service'
 fi
 
-# if the access point is active stop it
-if [ $(bash $AP_STATUS_SH) == "active" ]; then
-  bash $AP_STOP_SH
-  echo 'stopped access point'
-fi
+# stop access point service
+bash $AP_STOP_SH
+echo 'stopped access point'
 
 # attempt to connect to wifi
 echo 'attempting to connect to wifi'
