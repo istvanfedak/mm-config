@@ -40,7 +40,7 @@ For example a hello-world module should have the following structure:
 
 modules/
 |--- hello-world/
-|    | README.md
+|    |--- README.md
 |    |--- hello-world.js
 |    |--- bin/
 |    |    |--- install-hello-world.sh

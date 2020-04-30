@@ -1,6 +1,4 @@
 TODO list
-- fix access-point-handler service error
-  - has something to do with the system running it
 - start working the basic modules
   - handler module
     - should start up all other modules specified in the config
@@ -11,6 +9,8 @@ TODO list
   - config module
     - should be a graphql api for obtaining the following
       - get module port number
+  - password module
+    - allow user to change password and test password
   - wifi module
     - should allow user to connect to wifi
       - get wifi list
