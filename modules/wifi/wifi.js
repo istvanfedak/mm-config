@@ -1,18 +1,46 @@
+"use string";
 
-const http = require('http');
+const fs = require('fs');
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
+const { buildSchema } = require('graphql');
+const getWifiList = require('./lib/getWifiList');
 
-// this is the default ip of the raspberry pi
+const configPathName = '/usr/local/mm-config/config/config.json';
 const hostname = '0.0.0.0';
+const config = JSON.parse(fs.readFileSync(configPathName));
+// get port from config file
+const port = config['modules'].find(obj => obj.module === 'wifi')['port'];
 
-// this will be the port the setting api will communicate
-const port = 3000;
+const schema = buildSchema(`
+  type Query {
+    wifiList: [wifi!]!
+    wifi(name: String!): wifi
+  }
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('wifi');
-});
+  type wifi {
+    name: String
+    signalStrength: Int
+  }
+`);
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const root = {
+  wifiList: () => {
+     return getWifiList();
+  },
+  wifi: ({name}) => {
+      return getWifiList().find(obj => obj.name === name)
+  }
+};
+
+const app = express();
+
+app.use('/', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true,
+}));
+
+app.listen(port, hostname);
+console.log(`Running a GraphQL API server at http://${hostname}:${port}`);
+
