@@ -10,8 +10,7 @@ module.exports = connectToWifi
 function connectToWifi(name, password) {
     execSync(`bash ${script} ${name}`, { input: password });
     const wifiStatus = execSync(`bash ${statusScript}`).toString();
-    if(wifiStatus.includes("connected"))
-	return true;
-    else
+    if(wifiStatus.includes("disconnected"))
 	return false;
+    return true;
 }
