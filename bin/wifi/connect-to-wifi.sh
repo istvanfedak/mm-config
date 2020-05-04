@@ -4,17 +4,18 @@
 # note this script will clear this command from the ~/.bash_history for
 # security
 
-ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
-SCRIPTS="$ROOT_DIR/bin"
-
 if [ $# != 1 ]; then
   echo "usage: sudo bash $0 <wifi-name>"
   exit 0
 fi
 
-WIFI_NAME=$1
-read -sp 'Password: ' PASSWORD
+ROOT_DIR="$(cd "$(dirname "$0")/../../"; pwd)"
+SCRIPTS="$ROOT_DIR/bin"
 CONFIG_PATH_NAME='/etc/wpa_supplicant/wpa_supplicant.conf'
+WIFI_NAME=$1
+
+read -sp 'Password: ' PASSWORD
+echo ''
 
 # first we need to make a copy of the wpa supplicant config file if it doesn't
 # exist already
@@ -34,6 +35,7 @@ wpa_passphrase "$WIFI_NAME" <<< "$PASSWORD" | grep -v '#' >> $CONFIG_PATH_NAME
 echo "Saved wifi information in $CONFIG_PATH_NAME"
 
 # reconfigure wifi to attempt to connect to it
+sleep 1
 wpa_cli -i wlan0 reconfigure
 
 # clear the session's bash history

@@ -1,4 +1,7 @@
 TODO list
+
+- fix bug with wpa not reconfiguring wlan0
+  - has to do with the access point service
 - start working the basic modules
   - handler module
     - should start up all other modules specified in the config
